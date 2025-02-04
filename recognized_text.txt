@@ -1,0 +1,4 @@
+Loading image from screenshot_image.png
+Image loaded successfully.
+Extracted text: OOMBy
+

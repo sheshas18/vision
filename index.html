@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vision - AI Handwriting Recognition created by wolfpack</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .hero {
+            background: linear-gradient(rgba(30, 39, 46, 0.8), rgba(30, 39, 46, 0.8)), url('your-background-image.jpg') center/cover;
+            color: white;
+            text-align: center;
+            padding: 180px 20px;
+        }
+        .btn-primary {
+            background-color: #1e272e;
+            border-color: #1e272e;
+        }
+        .btn-primary:hover {
+            background-color: #485460;
+            border-color: #485460;
+        }
+        .btn-outline-secondary {
+            border-color: #808e9b;
+            color: #808e9b;
+        }
+        .btn-outline-secondary:hover {
+            background-color: #808e9b;
+            color: white;
+        }
+        .shadow-lg {
+            background-color: white;
+        }
+        .card {
+            border-radius: 15px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1e272e;">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Vision</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/scribble.html">Scribble to Text</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/speechtotext.html">Speech to Text</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/texttospeech.html">Text to Speech</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <div class="container">
+            <h1 class="display-3 fw-bold">Welcome to Vision</h1>
+            <p class="lead">An AI-powered solution for handwriting and speech recognition especially for specific learning disabled people including dysgraphia,dyslexia.</p>
+            <a href="#scribble-to-text" class="btn btn-primary btn-lg">Get Started</a>
+        </div>
+    </header>
+    
+    <section class="container my-5 text-center">
+        <div class="row align-items-center shadow-lg rounded-4 p-5 bg-white">
+            <div class="col-lg-6 text-start">
+                <h2 class="fw-bold">Next-Generation Handwriting Recognition</h2>
+                <p class="text-muted">Using state-of-the-art AI, Vision converts handwritten notes and speech into text with high accuracy.</p>
+                <div class="d-grid gap-2 d-md-flex">
+                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Learn More</button>
+                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">Try Now</button>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img class="img-fluid rounded-4" src="bootstrap-docs.png" alt="AI Recognition" width="500">
+            </div>
+        </div>
+    </section>
+    
+    <section class="container my-5">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <div class="card shadow-lg p-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Scribble to Text</h5>
+                        <p class="card-text">Convert your handwritten scribbles into digital text with ease.</p>
+                        <a href="/scribble.html" class="btn btn-primary">Try Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-lg p-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Speech to Text</h5>
+                        <p class="card-text">Transform spoken words into accurate text instantly.</p>
+                        <a href="/speechtotext.html" class="btn btn-primary">Try Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-lg p-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Text to Speech</h5>
+                        <p class="card-text">Convert written text into natural-sounding speech.</p>
+                        <a href="/texttospeech.html" class="btn btn-primary">Try Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="text-center py-4" style="background-color: #1e272e; color: white;">
+        <p>&copy; 2025 Vision. All rights reserved.</p>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
