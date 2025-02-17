@@ -1,0 +1,8 @@
+# Ignore the Dataset directory
+Dataset/
+
+# Ignore the virtual environment directory
+myenv/
+
+# Ignore the dataset ZIP file
+Dataset.zip
