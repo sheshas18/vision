@@ -29,6 +29,7 @@
             justify-content: center;
             align-items: center;
             background: white;
+            position: relative;
         }
 
         canvas {
@@ -52,6 +53,49 @@
             min-height: 50px;
             text-align: left;
         }
+
+        /* Calculator icon in the top-right corner */
+        .calculator-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #1e272e;
+        }
+
+        /* Calculator dialog box */
+        #calculatorDialog {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 50px;
+            width: 300px;
+            background: white;
+            padding: 20px;
+            border: 2px solid #1e272e;
+            border-radius: 10px;
+            z-index: 100;
+        }
+
+        #calculatorDialog input {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        #calculatorDialog .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        #calculatorDialog button {
+            width: calc(25% - 10px);
+            padding: 10px;
+            font-size: 18px;
+        }
     </style>
 </head>
 
@@ -65,6 +109,35 @@
         </div>
 
         <div id="recognizedText" class="mt-3">Recognized text will appear here...</div>
+
+        <!-- Calculator Icon -->
+        <div class="calculator-icon" onclick="toggleCalculator()">
+            &#128425; <!-- Calculator icon (use an appropriate emoji or icon) -->
+        </div>
+
+        <!-- Calculator Dialog Box -->
+        <div id="calculatorDialog">
+            <input type="text" id="calcDisplay" disabled />
+            <div class="btn-group">
+                <button onclick="calcInput('7')">7</button>
+                <button onclick="calcInput('8')">8</button>
+                <button onclick="calcInput('9')">9</button>
+                <button onclick="calcInput('/')">/</button>
+                <button onclick="calcInput('4')">4</button>
+                <button onclick="calcInput('5')">5</button>
+                <button onclick="calcInput('6')">6</button>
+                <button onclick="calcInput('*')">*</button>
+                <button onclick="calcInput('1')">1</button>
+                <button onclick="calcInput('2')">2</button>
+                <button onclick="calcInput('3')">3</button>
+                <button onclick="calcInput('-')">-</button>
+                <button onclick="calcInput('0')">0</button>
+                <button onclick="calcInput('.')">.</button>
+                <button onclick="clearCalc()">C</button>
+                <button onclick="calcInput('+')">+</button>
+                <button onclick="calculate()" style="flex: 1">=</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -103,7 +176,7 @@
         }
 
         // Handle form submission
-        document.getElementById('submitButton').addEventListener('click', function(event) {
+        document.getElementById('submitButton').addEventListener('click', function (event) {
             event.preventDefault();
 
             // Create a temporary canvas to ensure white background
@@ -126,19 +199,19 @@
                     method: "POST",
                     body: formData
                 })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    document.getElementById("recognizedText").innerText = data.message || "No text recognized.";
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                    document.getElementById("recognizedText").innerText = "Error processing the image: " + error.message;
-                });
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        document.getElementById("recognizedText").innerText = data.message || "No text recognized.";
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        document.getElementById("recognizedText").innerText = "Error processing the image: " + error.message;
+                    });
             }, "image/png");
         });
 
@@ -147,6 +220,35 @@
             canvas.width = window.innerWidth * 0.9;
             canvas.height = window.innerHeight * 0.7;
         });
+
+        // Toggle calculator dialog visibility
+        function toggleCalculator() {
+            const calcDialog = document.getElementById('calculatorDialog');
+            calcDialog.style.display = calcDialog.style.display === 'none' || calcDialog.style.display === '' ? 'block' : 'none';
+        }
+
+        // Calculator functions
+        let calcInputStr = '';
+
+        function calcInput(value) {
+            calcInputStr += value;
+            document.getElementById('calcDisplay').value = calcInputStr;
+        }
+
+        function clearCalc() {
+            calcInputStr = '';
+            document.getElementById('calcDisplay').value = '';
+        }
+
+        function calculate() {
+            try {
+                calcInputStr = eval(calcInputStr).toString();
+                document.getElementById('calcDisplay').value = calcInputStr;
+            } catch {
+                document.getElementById('calcDisplay').value = 'Error';
+                calcInputStr = '';
+            }
+        }
     </script>
 </body>
 
