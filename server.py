@@ -1,10 +1,31 @@
 import subprocess
 import cv2
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
+# Define a temporary directory to store uploaded images
+UPLOAD_FOLDER = "uploads"
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+# Route to serve the index.html file
+@app.route("/")
+def index():
+    return render_template("index.html")  # Serves index.html from the templates folder
+@app.route("/main.html")
+def login():
+    return render_template("main.html")
+@app.route("/scribble.html")
+def scribble():
+    return render_template("scribble.html")
+@app.route("/texttospeech.html")
+def texttospeech():
+    return render_template("texttospeech.html")
+@app.route("/speechtotext.html")
+def speechtotext():
+    return render_template("speechtotext.html")
 @app.route("/process-image", methods=["POST"])
 def process_image():
     # Check if a file is uploaded
@@ -12,7 +33,7 @@ def process_image():
         return jsonify({"error": "No file uploaded"}), 400
 
     file = request.files["file"]
-    file_path = "screenshot_image.png"
+    file_path = os.path.join(UPLOAD_FOLDER, "screenshot_image.png")  # Save to the uploads folder
     file.save(file_path)
 
     print(f"Image saved at: {file_path}")  # Debug line
@@ -33,7 +54,7 @@ def process_image():
             return jsonify({"error": f"Error in test.py: {result.stderr}"}), 500
 
         # Store the result in a text file (optional)
-        with open("recognized_text.txt", "w") as f:
+        with open(os.path.join(UPLOAD_FOLDER, "recognized_text.txt"), "w") as f:
             f.write(result.stdout)
 
         # Return the recognized text
@@ -50,4 +71,4 @@ def process_image():
             print(f"Deleted temporary file: {file_path}")  # Debug line
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
